@@ -36,7 +36,7 @@
 
   document.querySelectorAll('[data-ll]').forEach(b => b.onclick = () => {
     const k = b.dataset.ll;
-    if (Game.locked || used[k]) return;
+    if (Game.locked || used[k] || !$('quiz').classList.contains('active')) return;
     used[k] = true; b.disabled = true; LL[k]();
   });
 })();
