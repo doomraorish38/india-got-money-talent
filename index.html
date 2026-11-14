@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>India Got Money Talent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500;700&family=Rozha+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+
+  <!-- Screen 1: start -->
+  <section id="start" class="screen active">
+    <h1 class="title">India Got<br><em>Money Talent</em></h1>
+    <p class="tagline">Dimaag lagao, jeeto crore.</p>
+    <button id="play" class="gold-btn">Khel shuru karo</button>
+  </section>
+
+  <!-- Screen 2: quiz -->
+  <section id="quiz" class="screen">
+    <div class="hud"><span id="count"></span><span id="money"></span><span id="hearts"></span></div>
+    <div class="timer"><div id="timerbar"></div><b id="timernum"></b></div>
+    <h2 id="qtext"></h2>
+    <div id="opts" class="opts"></div>
+    <div class="lifelines">
+      <button data-ll="fifty">50-50</button>
+      <button data-ll="poll">Audience poll</button>
+      <button data-ll="expert">Expert</button>
+      <button data-ll="swap">Sawaal badlo</button>
+    </div>
+    <p id="toast"></p>
+  </section>
+
+  <!-- Screen 3: result -->
+  <section id="result" class="screen">
+    <h1 id="rtitle" class="title"></h1>
+    <p id="rtext" class="tagline"></p>
+    <button id="retry" class="gold-btn">Dobara khelo</button>
+  </section>
+
+  <!-- DATA -->
+  <script src="questions.js"></script>
+  <!-- PHASE 1: quiz engine -->
+  <script src="phase1_quiz.js"></script>
+  <!-- PHASE 2: timer + lifelines -->
+  <script src="phase2_lifelines.js"></script>
+  <!-- PHASE 3 se 6: jab tayyar ho, neeche ki line se // hata do
+  <script src="phase3_studio3d.js"></script>
+  <script src="phase4_host.js"></script>
+  <script src="phase5_ring.js"></script>
+  <script src="phase6_admin.js"></script>
+  -->
+</body>
+</html>
