@@ -38,11 +38,13 @@
 
   // ---------- 5. Host (primitives se bana) ----------
   const host = new THREE.Group(); scene.add(host);
+  const cartoon = new THREE.Group(); host.add(cartoon);                 // cartoon host ke saare hisse (model aane par chhup jayega)
+  Game.studio = { scene, host, cartoon, hooks: [] };                      // phase 4 isse use karta hai
   const skin = M(0xe0a878), gold = M(0xd89b00, { metalness: .6, roughness: .35 }), dark = M(0x1a1030, { roughness: .8 });
-  host.add(mesh(new THREE.CylinderGeometry(0.55, 0.7, 1.3, 24), gold, 0, 1.5, 0));          // jacket
-  host.add(mesh(new THREE.BoxGeometry(0.3, 0.14, 0.08), M(0xe0263d), 0, 2.08, 0.5));        // bow-tie
+  cartoon.add(mesh(new THREE.CylinderGeometry(0.55, 0.7, 1.3, 24), gold, 0, 1.5, 0));          // jacket
+  cartoon.add(mesh(new THREE.BoxGeometry(0.3, 0.14, 0.08), M(0xe0263d), 0, 2.08, 0.5));        // bow-tie
 
-  const head = new THREE.Group(); head.position.y = 2.15; host.add(head);
+  const head = new THREE.Group(); head.position.y = 2.15; cartoon.add(head);
   head.add(mesh(new THREE.SphereGeometry(0.42, 28, 20), skin, 0, 0.5, 0));
   const hair = mesh(new THREE.SphereGeometry(0.46, 28, 14, 0, Math.PI * 2, 0, Math.PI / 2), dark, 0, 0.56, -0.03); head.add(hair);
   const eyes = [-1, 1].map(s => { const e = mesh(new THREE.SphereGeometry(0.05, 12, 12), dark, s * 0.15, 0.56, 0.38); head.add(e);
@@ -55,7 +57,7 @@
     const p = new THREE.Group(); p.position.set(side * 0.68, 2.0, 0);
     p.add(mesh(new THREE.CylinderGeometry(0.13, 0.13, 0.9, 12), gold, 0, -0.45, 0));
     p.add(mesh(new THREE.SphereGeometry(0.15, 12, 12), skin, 0, -0.95, 0));
-    host.add(p); return p;
+    cartoon.add(p); return p;
   };
   const armL = makeArm(-1), armR = makeArm(1);
 
@@ -99,6 +101,7 @@
   let last = performance.now();
   (function loop(now) {
     const dt = Math.min((now - last) / 1000, 0.1), t = now / 1000; last = now;
+    Game.studio.hooks.forEach(f => f(dt, t));
     for (const k of ['cheer', 'sad', 'talk', 'flash']) S[k] = Math.max(0, S[k] - dt);
 
     S.arm = lerp(S.arm, S.cheer > 0 ? 1 : 0, Math.min(1, dt * 6));

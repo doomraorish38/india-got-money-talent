@@ -37,7 +37,7 @@ Game.show = () => {
 
 Game.answer = i => {                                          // i = -1 matlab time khatam
   if (Game.locked) return;
-  Game.locked = true;
+  Game.locked = true; Game.lastPick = i;
   const d = Game.pool[Game.i], btns = document.querySelectorAll('.opt'), ok = i === d.answer;
   ok ? Game.correct++ : Game.strikes++;
   if (i >= 0) btns[i].classList.add(ok ? 'correct' : 'wrong');
