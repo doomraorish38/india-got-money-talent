@@ -26,7 +26,8 @@
   const lerp = (a, b, k) => a + (b - a) * k;
 
   // ---------- 4. Studio set ----------
-  scene.add(Object.assign(mesh(new THREE.CircleGeometry(7, 48), M(0x120a33, { metalness: .6, roughness: .25 })), { rotation: new THREE.Euler(-Math.PI / 2, 0, 0) }));
+  const floor = mesh(new THREE.CircleGeometry(7, 48), M(0x120a33, { metalness: .6, roughness: .25 }));
+  floor.rotation.x = -Math.PI / 2; scene.add(floor);
   const ring = mesh(new THREE.TorusGeometry(3.4, 0.05, 12, 80), M(0xffc933, { emissive: 0xffa800, emissiveIntensity: 1.2 }), 0, 0.03, 0);
   ring.rotation.x = Math.PI / 2; scene.add(ring);
   const bars = [];
